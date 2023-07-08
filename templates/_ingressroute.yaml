@@ -6,7 +6,7 @@ spec:
   entryPoints: {{ toYaml .Values.ingressroute.entryPoints | nindent 2 }}
   {{- if .Values.ingressroute.tls }}
   tls:
-{{ toYaml .Values.ingressroute.tls | indent 2 }}
+{{ toYaml .Values.ingressroute.tls | indent 4 }}
   {{- end }}
   routes:
   {{- range $host := .Values.ingressroute.routes }}
