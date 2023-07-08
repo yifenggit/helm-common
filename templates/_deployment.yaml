@@ -9,6 +9,12 @@ spec:
         app: {{ template "common.name" . }}
         release: {{ .Release.Name | quote }}
     spec:
+      {{- if .Values.imagePullSecrets }}
+      imagePullSecrets:
+        {{- range $name := .Values.imagePullSecrets }}
+      - name: {{ $name -}}
+        {{- end }}
+      {{- end }}
       containers:
       -
 {{ include "common.container.tpl" . | indent 8 }}
