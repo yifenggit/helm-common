@@ -1,0 +1,9 @@
+{{- define "common.middleware.tpl" -}}
+apiVersion: traefik.io/v1alpha1
+kind: Middleware
+{{ template "common.metadata" . }}
+spec: {}
+{{- end -}}
+{{- define "common.middleware" -}}
+{{- template "common.util.merge" (append . "common.middleware.tpl") -}}
+{{- end -}}

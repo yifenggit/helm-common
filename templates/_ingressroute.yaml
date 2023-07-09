@@ -2,13 +2,7 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 {{ template "common.metadata" . }}
-  {{- if .Values.ingressroute.spec }}
-  {{- $tpl := toYaml .Values.ingressroute.spec }}
-spec: {{ tpl $tpl . | nindent 2 }}
-  {{- end }}
-{{- end -}}
-
-{{- define "common.ingressroute.metadata" -}}
+spec: {}
 {{- end -}}
 
 {{- define "common.ingressroute" -}}
