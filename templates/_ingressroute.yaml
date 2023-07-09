@@ -2,20 +2,13 @@
 apiVersion: traefik.io/v1alpha1
 kind: IngressRoute
 {{ template "common.metadata" . }}
-spec:
-  entryPoints: {{ toYaml .Values.ingressroute.entryPoints | nindent 2 }}
-  {{- if .Values.ingressroute.tls }}
-  tls:
-{{ toYaml .Values.ingressroute.tls | indent 4 }}
+  {{- if .Values.ingressroute.spec }}
+  {{- $tpl := toYaml .Values.ingressroute.spec }}
+spec: {{ tpl $tpl . | nindent 2 }}
   {{- end }}
-  routes:
-  {{- range $host := .Values.ingressroute.routes }}
-  - kind: Rule
-    match: {{ $host | printf "Host(`%s`) && PathPrefix(`/`)" }}
-    services:
-    - name: {{ template "common.fullname" $ }}
-      port: 80
-  {{- end }}
+{{- end -}}
+
+{{- define "common.ingressroute.metadata" -}}
 {{- end -}}
 
 {{- define "common.ingressroute" -}}

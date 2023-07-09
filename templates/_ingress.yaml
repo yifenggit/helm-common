@@ -15,7 +15,7 @@ spec:
       - path: /
         backend:
           serviceName: {{ template "common.fullname" $ }}
-          servicePort: 80
+          servicePort: {{ default 80 .Values.service.port }}
   {{- end }}
   {{- if .Values.ingress.tls }}
   tls:
